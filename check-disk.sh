@@ -45,46 +45,42 @@ smartctl $devicesmart --all -H > "${fileloc}/${devicevis}-pre.txt"
 echo "Done."
 
 # Run short selftest
-echo "Starting short test..."
+echo "Running short test..."
 smartctl $devicesmart -t short > /dev/null
 sleep 10s
 while [[ $(smartctl $devicesmart --all | grep "progress" -i -A 1) ]]; do
-	echo "Waiting for test to finish..."
 	sleep 30s
 done
 echo "Short selftest finished."
 
 # Run conveyance selftest
-echo "Starting conveyance selftest..."
+echo "Running conveyance selftest..."
 smartctl $devicesmart -t conveyance > /dev/null
 sleep 10s
 while [[ $(smartctl $devicesmart --all | grep "progress" -i -A 1) ]]; do
-	echo "Waiting for test to finish..."
 	sleep 30s
 done
 echo "Conveyance selftest finished."
 
 # Run long selftest
-echo "Starting long selftest..."
+echo "Running long selftest..."
 smartctl $devicesmart -t long > /dev/null
 sleep 10s
 while [[ $(smartctl $devicesmart --all | grep "progress" -i -A 1) ]]; do
-	echo "Waiting for test to finish..."
 	sleep 30s
 done
 echo "Long selftest finished."
 
 # Running badblocks on drive
 echo "Running badblocks on drive..."
-badblocks -ws "${device%% *}"
+badblocks -ws "$device"
 echo "badblocks finished."
 
 # Run long selftest
-echo "Starting long selftest..."
+echo "Running long selftest..."
 smartctl $devicesmart -t long > /dev/null
 sleep 10s
 while [[ $(smartctl $devicesmart --all | grep "progress" -i -A 1) ]]; do
-	echo "Waiting for test to finish..."
 	sleep 30s
 done
 echo "Long selftest finished."
