@@ -33,7 +33,7 @@ echo "Files will be stored to               ${fileloc}/"
 echo ""
 
 # Check if device is HDD
-if ! [[ smartctl $devicesmart -a | grep 'Rotation Rate' | grep 'rpm' ]]; then
+if ! [[ $(smartctl $devicesmart -a | grep 'Rotation Rate' | grep 'rpm') ]]; then
 	echo "Selected device is not a HDD!"
     echo "Aborting."
     exit 1
