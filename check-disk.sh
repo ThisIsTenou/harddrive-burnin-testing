@@ -41,14 +41,14 @@ fi
 
 # Save S.M.A.R.T. data to file
 echo "Writing S.M.A.R.T.-results to file..."
-smartctl $device --all -H > "${fileloc}/${devicevis}-pre.txt"
+smartctl $devicesmart --all -H > "${fileloc}/${devicevis}-pre.txt"
 echo "Done."
 
 # Run short selftest
 echo "Starting short test..."
 smartctl $devicesmart -t short > /dev/null
 sleep 10s
-while [[ $(smartctl $device --all | grep "progress" -i -A 1) ]]; do
+while [[ $(smartctl $devicesmart --all | grep "progress" -i -A 1) ]]; do
 	echo "Waiting for test to finish..."
 	sleep 30s
 done
@@ -58,7 +58,7 @@ echo "Short selftest finished."
 echo "Starting conveyance selftest..."
 smartctl $devicesmart -t conveyance > /dev/null
 sleep 10s
-while [[ $(smartctl $device --all | grep "progress" -i -A 1) ]]; do
+while [[ $(smartctl $devicesmart --all | grep "progress" -i -A 1) ]]; do
 	echo "Waiting for test to finish..."
 	sleep 30s
 done
@@ -68,7 +68,7 @@ echo "Conveyance selftest finished."
 echo "Starting long selftest..."
 smartctl $devicesmart -t long > /dev/null
 sleep 10s
-while [[ $(smartctl $device --all | grep "progress" -i -A 1) ]]; do
+while [[ $(smartctl $devicesmart --all | grep "progress" -i -A 1) ]]; do
 	echo "Waiting for test to finish..."
 	sleep 30s
 done
@@ -83,12 +83,12 @@ echo "badblocks finished."
 echo "Starting long selftest..."
 smartctl $devicesmart -t long > /dev/null
 sleep 10s
-while [[ $(smartctl $device --all | grep "progress" -i -A 1) ]]; do
+while [[ $(smartctl $devicesmart --all | grep "progress" -i -A 1) ]]; do
 	echo "Waiting for test to finish..."
 	sleep 30s
 done
 echo "Long selftest finished."
 
 echo "Writing S.M.A.R.T.-results to file..."
-smartctl $device --all -H > "${fileloc}/${devicevis}-post.txt"
+smartctl $devicesmart --all -H > "${fileloc}/${devicevis}-post.txt"
 echo "All done!"
