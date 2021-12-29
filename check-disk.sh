@@ -42,7 +42,7 @@ waitfortest () {
 
 # Check if device is HDD
 if ! [[ $(smartctl $devicesmart -a | grep 'Rotation Rate' | grep 'rpm') ]]; then
-	echo "Selected device is not a HDD!"
+    echo "Selected device is not a HDD!"
     echo "Aborting."
     exit 1
 fi
