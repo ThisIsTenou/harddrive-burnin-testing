@@ -18,7 +18,7 @@ for devicesmart in "${devices[@]}"; do
     device="$(echo $devicesmart | cut -d " " -f1)"
     if [[ $(smartctl $devicesmart -a | grep 'Rotation Rate' | grep 'rpm') ]]; then
         echo "Starting tests for $device"
-        ./check-disk.sh "$device" "$fileloc" &> output.log &
+        ./check-disk.sh "$device" "$fileloc" &> "$fileloc/$(echo "$device" | cut -d "/" -f3).log" &
     else
         echo "$device is not a HDD, skipped."
         devices=( "${devices[@]/$device}" )
